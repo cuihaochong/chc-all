@@ -1,0 +1,54 @@
+server:
+  port: 8081
+spring:
+  application:
+    name: lcn-third
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver # 配置MySQL8的驱动程序类
+    url: jdbc:mysql://47.93.131.24:3306/w_tran2?useUnicode=true&characterEncoding=utf-8&useSSL=false&zeroDateTimeBehavior=convertToNull&serverTimezone=GMT%2B8 # 数据库连接地址
+    username: root # 数据库用户名
+    password: 123456 # 数据库连接密码
+
+# 监控中心
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*" #暴露所有端点 默认是info,health
+  endpoint:
+    health:
+      show-details: always
+
+# mybatis配置
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  mapper-locations: classpath*:mapper/**/*Mapper.xml
+  type-aliases-package: com.chc.pojo.entity
+
+# tkMybatis配置
+mapper:
+  mappers: com.chc.base.BaseMapper
+  # 设置true以后，会去判断 insert 和 update 中符串类型!=''
+  not-empty: false
+  identity: MYSQL
+
+eureka:
+  instance:
+    instance-id: lcn-third # 注册到eureka服务器上的服务名
+    prefer-ip-address: true # 显示ip
+    lease-expiration-duration-in-seconds: 10 # 如果现在超过了10秒的间隔（默认是90秒）
+    lease-renewal-interval-in-seconds: 5 # 设置心跳的时间间隔（默认是30秒）
+  client:
+    register-with-eureka: true # 将当前服务注册到eureka服务器上
+    service-url: # eureka服务器地址
+      defaultZone: http://localhost:22122/eureka
+
+#lcn配置
+tx-lcn:
+  client:
+    manager-address: 127.0.0.1:8070
+  springcloud:
+    loadbalance:
+      enabled: true

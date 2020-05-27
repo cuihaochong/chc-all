@@ -1,0 +1,26 @@
+server:
+  port: 8080 # 服务端口
+spring:
+  application:
+    name: api-gateway # spring 应用名
+eureka:
+  instance:
+    instance-id: api-gateway # 注册到eureka服务器上的服务名
+    prefer-ip-address: true # 显示ip
+    lease-expiration-duration-in-seconds: 10 # 如果现在超过了10秒的间隔（默认是90秒）
+    lease-renewal-interval-in-seconds: 5 # 设置心跳的时间间隔（默认是30秒）
+  client:
+    register-with-eureka: true # 将当前服务注册到eureka服务器上
+    service-url: # eureka服务器地址
+      defaultZone: http://localhost:22122/eureka
+zuul:
+  routes:
+    user: # 配置user服务访问路由,user为虚拟路由
+      path: /user-server/**
+      serviceId: user-provider
+  ignored-services: # 忽略根据serviceId路径访问
+    "*"
+  prefix: /chc # 公共访问前缀,即为:ip:port/[prefix]/[route path]/[requestMapping]
+  filter:
+    ignored-methods: # 自定义配置-不被拦截的方法
+      - /sing

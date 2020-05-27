@@ -1,0 +1,35 @@
+server:
+  port: 20001 # 服务端口
+spring:
+  application:
+    name: user-consumer # spring 应用名
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver # 配置MySQL8的驱动程序类
+    #    driver-class-name: com.mysql.jdbc.Driver # 配置MySQL5的驱动程序类
+    url: jdbc:mysql://localhost:3306/w_fdfs?useUnicode=true&characterEncoding=utf-8&useSSL=false&zeroDateTimeBehavior=convertToNull&serverTimezone=UTC # 数据库连接地址
+    username: root # 数据库用户名
+    password: 123456 # 数据库连接密码
+eureka:
+  instance:
+    instance-id: user-consumer # 注册到eureka服务器上的服务名
+    prefer-ip-address: true # 显示ip
+    lease-expiration-duration-in-seconds: 10 # 如果现在超过了10秒的间隔（默认是90秒）
+    lease-renewal-interval-in-seconds: 5 # 设置心跳的时间间隔（默认是30秒）
+  client:
+    register-with-eureka: true # 将当前服务注册到eureka服务器上
+    service-url: # eureka服务器地址
+      defaultZone: http://localhost:22122/eureka
+feign:
+  compression:
+    request:
+      enabled: true # 开启数据压缩
+      mime-types: # 压缩类型
+        - text/xml
+        - application/xml
+        - application/json
+      min-request-size: 2048 # 超过该字节数进行压缩
+  hystrix:
+    enabled: true # 开启熔断
+logging:
+  level:
+    com.chc: dubug

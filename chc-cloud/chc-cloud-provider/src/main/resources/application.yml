@@ -1,0 +1,15 @@
+server:
+  port: 20000 # 服务端口
+spring:
+  application:
+    name: user-provider # spring 应用名
+eureka:
+  instance:
+    instance-id: user-provider # 注册到eureka服务器上的服务名
+    prefer-ip-address: true # 显示ip
+    lease-expiration-duration-in-seconds: 10 # 如果现在超过了10秒的间隔（默认是90秒）
+    lease-renewal-interval-in-seconds: 5 # 设置心跳的时间间隔（默认是30秒）
+  client:
+    register-with-eureka: true # 将当前服务注册到eureka服务器上
+    service-url: # eureka服务器地址
+      defaultZone: http://localhost:22122/eureka

@@ -1,0 +1,81 @@
+spring:
+  application:
+    name: eureka-server
+  profiles:
+    active: eureka1 # 配置文件启用哪个
+
+# 监控中心
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*" #暴露所有端点 默认是info,health
+  endpoint:
+    health:
+      show-details: always
+
+---
+
+spring:
+  profiles: eureka1 # 此实例配置文件名
+server:
+  port: 7001 # 此实例服务端口
+eureka:
+  instance:
+    hostname: server1 # 此实例所在的主机名称
+    instance-id: eureka-server1 # 此实例在当前应用的唯一id
+    prefer-ip-address: true
+  server:
+    eviction-interval-timer-in-ms: 1000   #设置清理的间隔时间，而后这个时间使用的是毫秒单位（默认是60秒）
+    enable-self-preservation: true #设置为false表示关闭保护模式
+  client:
+    fetch-registry: false # 此实例是否应从eureka服务器获取eureka注册表信息
+    register-with-eureka: false # 此实例是否应将其信息注册到eureka服务器以供他人发现
+    service-url:
+      #      defaultZone: http://server1:7001/eureka
+      #        defaultZone: http://admin:enjoy@localhost:7001/eureka
+      defaultZone: http://server1:7001/eureka,http://server2:7002/eureka,http://server3:7003/eureka
+
+---
+
+spring:
+  profiles: eureka2 # 当前配置文件名
+server:
+  port: 7002 # 服务启动端口
+eureka:
+  instance:
+    hostname: server2 # 此实例所在的主机名称
+    instance-id: eureka-server2 # 此实例在当前应用的唯一id
+    prefer-ip-address: true
+  server:
+    eviction-interval-timer-in-ms: 1000   #设置清理的间隔时间，而后这个时间使用的是毫秒单位（默认是60秒）
+    enable-self-preservation: true #设置为false表示关闭保护模式
+  client:
+    fetch-registry: false # 此实例是否应从eureka服务器获取eureka注册表信息
+    register-with-eureka: false # 此实例是否应将其信息注册到eureka服务器以供他人发现
+    service-url:
+      #      defaultZone: http://server1:7001/eureka
+      #        defaultZone: http://admin:enjoy@localhost:7001/eureka
+      defaultZone: http://server1:7001/eureka,http://server2:7002/eureka,http://server3:7003/eureka
+
+---
+
+spring:
+  profiles: eureka3 # 当前配置文件名
+server:
+  port: 7003 # 服务启动端口
+eureka:
+  instance:
+    hostname: server3 # 此实例所在的主机名称
+    instance-id: eureka-server3 # 此实例在当前应用的唯一id
+    prefer-ip-address: true
+  server:
+    eviction-interval-timer-in-ms: 1000   #设置清理的间隔时间，而后这个时间使用的是毫秒单位（默认是60秒）
+    enable-self-preservation: true #设置为false表示关闭保护模式
+  client:
+    fetch-registry: false # 此实例是否应从eureka服务器获取eureka注册表信息
+    register-with-eureka: false # 此实例是否应将其信息注册到eureka服务器以供他人发现
+    service-url:
+      #      defaultZone: http://server1:7001/eureka
+      #        defaultZone: http://admin:enjoy@localhost:7001/eureka
+      defaultZone: http://server1:7001/eureka,http://server2:7002/eureka,http://server3:7003/eureka

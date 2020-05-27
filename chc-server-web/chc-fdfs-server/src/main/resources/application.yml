@@ -1,0 +1,66 @@
+server:
+  port: 8901
+spring:
+  http:
+    encoding: # 编码格式
+      charset: UTF-8
+      enabled: true
+      force: true
+  servlet:
+    multipart:
+      max-file-size: 100MB  # Max file size.
+      max-request-size: 100MB # Max request size.
+  application: # 服务应用名
+    name: fastdfs-provider
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver # 配置MySQL8的驱动程序类
+    url: jdbc:mysql://47.93.131.24:3306/w_fdfs?useUnicode=true&characterEncoding=utf-8&useSSL=false&zeroDateTimeBehavior=convertToNull&serverTimezone=UTC # 数据库连接地址
+    username: root # 数据库用户名
+    password: 123456 # 数据库连接密码
+fdfs:
+  webServerUrl: 47.93.131.24:8080 # Ng配置
+  temp:
+    dic: temp/
+  so-timeout: 3000  # 读取时间
+  connect-timeout: 5000 # 连接超时时间
+  pool: #连接池配置
+    max-total: 200
+    max-total-per-key: 20
+    max-wait-millis: 25000
+  thumb-image:  # 缩略图配置
+    width: 200
+    height: 200
+  tracker-list: # tracker服务配置地址列表
+    - 47.93.131.24:22122
+
+# 注册中心配置
+eureka:
+  client:
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://47.93.131.24:7001/eureka
+  instance:
+    instance-id: fastdfs-provider
+    prefer-ip-address: true
+    lease-renewal-interval-in-seconds: 10
+    lease-expiration-duration-in-seconds: 30
+
+# 分页配置
+pagehelper:
+  helper-dialect: mysql
+  reasonable: true
+  support-methods-arguments: true
+# mybatis plus配置
+mybatis-plus:
+  mapper-locations: classpath*:mapper/**/*Mapper.xml
+  # 实体扫描,多个package用逗号或分号分隔
+  type-aliases-package: com.cestc.*.pojo.entity
+  global-config:
+    db-config:
+      # 主键类型
+      id-type: auto
+  configuration:
+    # 是否开启自动驼峰命名规则
+    map-underscore-to-camel-case: true
+    # 开启sql打印
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
