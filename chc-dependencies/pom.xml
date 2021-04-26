@@ -31,7 +31,7 @@
         <swagger2.ui.version>1.9.6</swagger2.ui.version>
         <commons-lang3.version>3.9</commons-lang3.version>
         <commons-collections4.version>4.1</commons-collections4.version>
-        <commons-io.version>2.6</commons-io.version>
+        <commons-io.version>2.7</commons-io.version>
         <commons-email.version>1.5</commons-email.version>
         <commons-fileupload.version>1.4</commons-fileupload.version>
         <commons-codec.version>1.13</commons-codec.version>
