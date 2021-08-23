@@ -39,7 +39,7 @@
         <alibaba.fastjson.version>1.2.59</alibaba.fastjson.version>
         <thumbnailator.version>0.4.8</thumbnailator.version>
         <javacv-platform.version>1.3.1</javacv-platform.version>
-        <jsoup.version>1.11.3</jsoup.version>
+        <jsoup.version>1.14.2</jsoup.version>
     </properties>
     <dependencyManagement>
         <dependencies>
