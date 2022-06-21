@@ -25,7 +25,7 @@
         <springboot.mybatis.version>2.1.0</springboot.mybatis.version>
         <tk.mybatis.version>2.1.5</tk.mybatis.version>
         <mybatis-plus.version>3.3.1</mybatis-plus.version>
-        <mysql.sersion>8.0.17</mysql.sersion>
+        <mysql.sersion>8.0.28</mysql.sersion>
         <github.pagehelper>1.2.12</github.pagehelper>
         <swagger2.version>2.9.2</swagger2.version>
         <swagger2.ui.version>1.9.6</swagger2.ui.version>
